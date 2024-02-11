@@ -5,11 +5,18 @@ import tourism.model.TouristAttraction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class TouristRepository {
-    private final List<TouristAttraction> touristAttractions = new ArrayList<>();
+    private final List<TouristAttraction> touristAttractions;
+
+    public TouristRepository() {
+        touristAttractions = new ArrayList<>();
+        // Add some sample attractions
+        touristAttractions.add(new TouristAttraction("Den Blå Planet, National Aquarium Denmark", "Experience the world under the sea as you discover majestic hammerhead sharks, secretive octopi and graceful rays at Northern Europe’s largest aquarium, Den Blå Planet (The Blue Planet) in Copenhagen."));
+        touristAttractions.add(new TouristAttraction("GoBoat Copenhagen", "Experience Copenhagen from a completely new perspective and explore the harbour at your own pace with GoBoat. You don’t need any certification or sailing experience to drive a boat - just come aboard! "));
+        touristAttractions.add(new TouristAttraction("Torvehallerne", "Torvehallerne is one of Copenhagen's gems for locals and tourists alike. You can find speciality goods, fresh vegetables and exquisite little food bars where you can get specialities from all over the world."));
+    }
 
     // Create
     public void addTouristAttraction(TouristAttraction touristAttraction) {
@@ -21,10 +28,13 @@ public class TouristRepository {
         return touristAttractions;
     }
 
-    public Optional<TouristAttraction> getTouristAttractionByName(String name) {
-        return touristAttractions.stream()
-                .filter(attraction -> attraction.getName().equalsIgnoreCase(name))
-                .findFirst();
+    public TouristAttraction getTouristAttractionByName(String name) {
+        for (TouristAttraction attraction : touristAttractions) {
+            if (attraction.getName().equalsIgnoreCase(name)) {
+                return attraction;
+            }
+        }
+        throw new IllegalArgumentException("Tourist Attraction with name " + name + " not found");
     }
 
     // Update
@@ -35,10 +45,26 @@ public class TouristRepository {
                 return;
             }
         }
+        throw new IllegalArgumentException("Tourist Attraction with name " + name + " not found");
     }
 
     // Delete
-    public void deleteTouristAttraction(String name) {
-        touristAttractions.removeIf(attraction -> attraction.getName().equalsIgnoreCase(name));
+// Delete
+    public boolean deleteTouristAttraction(String name) {
+        for (TouristAttraction attraction : touristAttractions) {
+            if (attraction.getName().equalsIgnoreCase(name)) {
+                touristAttractions.remove(attraction);
+                return true; // Deleted successfully
+            }
+        }
+        return false; // Not found for deletion
+    }
+
+    public String getTouristAttractionDescriptionByName(String name) { //TODO DO I NEED THIS? does it even work?
+        for (TouristAttraction attraction : touristAttractions)
+            if (attraction.getName().equalsIgnoreCase(name)) {
+                return attraction.getDescription();
+            }
+        return "description not found for: " + name;
     }
 }
