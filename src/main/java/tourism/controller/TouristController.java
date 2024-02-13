@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tourism.model.TouristAttraction;
 import tourism.service.TouristService;
@@ -22,18 +23,31 @@ public class TouristController {
     }
 
     // GET /attractions
+//    @GetMapping
+//    public ResponseEntity<List<TouristAttraction>> getAllAttractions() {
+//        List<TouristAttraction> attractions = touristService.getAllTouristAttractions();
+//        return new ResponseEntity<>(attractions, HttpStatus.OK);
+//    }
     @GetMapping
-    public ResponseEntity<List<TouristAttraction>> getAllAttractions() {
+    public String getAllAttractions(Model model) {
         List<TouristAttraction> attractions = touristService.getAllTouristAttractions();
-        return new ResponseEntity<>(attractions, HttpStatus.OK);
+        model.addAttribute("attractions", attractions);
+        return "attractions" ;
     }
 
     // GET /attractions/{name}
+//    @GetMapping("/{name}")
+//    public ResponseEntity<TouristAttraction> getAttractionByName(@PathVariable String name) {
+//        TouristAttraction attraction = touristService.getTouristAttractionByName(name);
+//        return new ResponseEntity<>(attraction, HttpStatus.OK);
+//    }
     @GetMapping("/{name}")
-    public ResponseEntity<TouristAttraction> getAttractionByName(@PathVariable String name) {
+    public String getAttractionByName(@PathVariable String name, Model model) {
         TouristAttraction attraction = touristService.getTouristAttractionByName(name);
-        return new ResponseEntity<>(attraction, HttpStatus.OK);
+        model.addAttribute("attraction", attraction); // Add the attraction object to the model
+        return "attraction"; // Return the name of the HTML template to render
     }
+
 
     // POST /attractions/add
     @PostMapping("/add")

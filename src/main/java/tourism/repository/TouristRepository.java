@@ -13,9 +13,9 @@ public class TouristRepository {
     public TouristRepository() {
         touristAttractions = new ArrayList<>();
         // Add some sample attractions
-        touristAttractions.add(new TouristAttraction("Den Blå Planet, National Aquarium Denmark", "Experience the world under the sea as you discover majestic hammerhead sharks, secretive octopi and graceful rays at Northern Europe’s largest aquarium, Den Blå Planet (The Blue Planet) in Copenhagen."));
-        touristAttractions.add(new TouristAttraction("GoBoat Copenhagen", "Experience Copenhagen from a completely new perspective and explore the harbour at your own pace with GoBoat. You don’t need any certification or sailing experience to drive a boat - just come aboard! "));
-        touristAttractions.add(new TouristAttraction("Torvehallerne", "Torvehallerne is one of Copenhagen's gems for locals and tourists alike. You can find speciality goods, fresh vegetables and exquisite little food bars where you can get specialities from all over the world."));
+        touristAttractions.add(new TouristAttraction("Den Blå Planet, National Aquarium Denmark", "Experience the world under the sea as you discover majestic hammerhead sharks, secretive octopi and graceful rays at Northern Europe’s largest aquarium, Den Blå Planet (The Blue Planet) in Copenhagen.","/images/Den_Bl_Planet1.jpg"));
+        touristAttractions.add(new TouristAttraction("GoBoat Copenhagen", "Experience Copenhagen from a completely new perspective and explore the harbour at your own pace with GoBoat. You don’t need any certification or sailing experience to drive a boat - just come aboard! ", "/images/GoBoat_1.jpg"));
+        touristAttractions.add(new TouristAttraction("Torvehallerne", "Torvehallerne is one of Copenhagen's gems for locals and tourists alike. You can find speciality goods, fresh vegetables and exquisite little food bars where you can get specialities from all over the world.", "/images/Torvehallen1.jpg"));
     }
 
     // Create
